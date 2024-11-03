@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentari Alexsa</title>
+    <meta name="author" content="David Grzyb">
+    <meta name="description" content="">
+
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+        .font-family-karla { font-family: karla; }
+        .bg-sidebar { background: #363632; }
+        .cta-btn { color: #1acc64; }
+        .upgrade-btn { background: #18bd5d; }
+        .upgrade-btn:hover { background: #16e07b; }
+        .active-nav-link { background: #19d47d; }
+        .nav-item:hover { background: #19c27b; }
+        .account-link:hover { background: #19cc73; }
+    </style>
+</head>
+</head>
+<body class="bg-gray-100 font-family-karla flex">
+
+    <aside class="relative bg-sidebar h-screen w-64   hidden sm:block shadow-xl">
+        <div class="p-6">
+            <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+            <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> New Report
+            </button>
+        </div>
+        <nav class="text-white text-base font-semibold pt-3">
+            <a href="index.html" class="flex items-center  text-white py-4 pl-6 nav-item">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Dashboard
+            </a>
+            <div  class="flex items-center text-white hover:opacity-100 py-4 pl-6 ">
+              
+                MENU KARYAWAN
+            </div>
+            
+            <a href="karyawan.html" class="flex items-center active-nav-link text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-user-friends mr-3"></i>
+
+                Karyawan
+            </a>
+            <a href="jabatan.html" class="flex items-center  text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-user-tie mr-3"></i>
+
+                Jabatan
+            </a>
+            <a href="divisi.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-user-secret mr-3"></i>
+
+                DIvisi
+            </a>
+            
+            <div class="flex items-center text-white hover:opacity-100 py-4 pl-6 ">
+              
+                MENU ABSENSI
+            </div>
+            <a href="absen.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-user-check mr-3"></i>
+
+                Absensi
+            </a>
+            
+            <a href="izin.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-calendar-check mr-3"></i>
+
+                Izin
+            </a>
+            <a href="lembur.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fas fa-clock mr-3"></i>
+
+                Lembur 
+            </a>
+        </nav>
+        
+    </aside>
+
+    <div class="w-full flex flex-col h-screen overflow-y-hidden">
+        <!-- Desktop Header -->
+        <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+            <div class="w-1/2"></div>
+            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end flex items-center  text-black py-3 pl-4 "> Mentari Alexsa
+                <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-aqua-400 hover:border-aqua-300 focus:border-aqua-300 focus:outline-none">
+                    <img src="image/logo.jpg">
+                </button>
+                <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
+                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- Mobile Header & Nav -->
+        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+                <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+                    <i x-show="!isOpen" class="fas fa-bars"></i>
+                    <i x-show="isOpen" class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Dropdown Nav -->
+            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+                <a href="index.html" class="flex items-center  text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </a>
+                <div  class="flex items-center text-white hover:opacity-100 py-4 pl-6 ">
+              
+                    MENU KARYAWAN
+                </div>
+                
+                <a href="karyawan.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-user-friends mr-3"></i>
+                    Karyawan
+                </a>
+                <a href="jabatan.html" class="flex items-center  text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-user-tie mr-3"></i>
+
+                    Jabatan
+                </a>
+                <a href="divisi.html" class="flex items-center  text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-user-secret mr-3"></i>
+
+                    DIvisi
+                </a>
+                
+                <div  class="flex items-center  text-white py-2 pl-4 nav-item">
+                  
+                    MENU ABSENSI
+                </div>
+                <a href="absen.html" class="flex items-center  text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-user-check mr-3"></i>
+
+                    Absensi
+                </a>
+                
+                <a href="izin.html" class="flex items-center  text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-calendar-check mr-3"></i>
+
+                    Izin
+                </a>
+                <a href="lembur.html" class="flex items-center  text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-clock mr-3"></i>
+
+                    Lembur 
+                </a>
+            </nav>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-cogs mr-3"></i>
+                    Support
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-user mr-3"></i>
+                    My Account
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Sign Out
+                </a>
+                
+            </nav>
+            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> New Report
+            </button> -->
+        </header>
+        <div class="w-full mt-12 max-h-100 overflow-y-scroll">
+            <p class="text-xl pb-3 flex items-center">
+                <i class="fas fa-list mr-3"></i> Tabel Karyawan
+                <div class="flex justify-end">
+                   <a href="forms.html">
+                <span class=" inline-flex items-right rounded-md bg-purple-150 px-4 py-1 text-ig font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10"> + karyawan</span>
+            </a>  
+                </div>
+               
+            </p>
+            <div class="bg-white overflow-auto">
+                <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+                    <thead>
+       
+                            <th class="w-1/8 text-left py-3 px-4 uppercase font-semibold text-sm">No</th>
+                            <th class=" text-left py-3 px-4 uppercase font-semibold text-sm">Kode</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Nama</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
+                            <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Alamat </th>
+                            <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Jabatan</th>
+                            <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Aksi</th>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <tr>
+                            <td class=" text-left py-3 px-4">1</td>
+                            <td class=" text-left py-3 px-4">MM01</td>
+                            <td class="text-left py-3 px-4"><a >Mentari Alexsa </a></td>
+                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" >Mentari@gmail.com</a></td>
+                            <td class="text-center py-3 px-4"><a  >jl.Kodiklat </a></td>
+                            <td class="text-center py-3 px-4"><a > Manager</a></td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span
+                                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    <span aria-hidden
+                                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">Activo</span>
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class=" text-left py-3 px-4">2</td>
+                            <td class=" text-left py-3 px-4">MN02</td>
+                            <td class="text-left py-3 px-4"><a >Nisa </a></td>
+                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" >Nissa@gmail.com</a></td>
+                            <td class="text-center py-3 px-4"><a  >jl.Mawut </a></td>
+                            <td class="text-center py-3 px-4"><a > Assistant Manager</a></td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span
+                                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    <span aria-hidden
+                                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">Activo</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class=" text-left py-3 px-4">3</td>
+                            <td class=" text-left py-3 px-4">MP03</td>
+                            <td class="text-left py-3 px-4"><a >Ananda Eldin Eldinar </a></td>
+                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" >Ananda@gmail.com</a></td>
+                            <td class="text-center py-3 px-4"><a  >jl.Kebayoran  </a></td>
+                            <td class="text-center py-3 px-4"><a > SPV</a></td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span
+                                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    <span aria-hidden
+                                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">Activo</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class=" text-left py-3 px-4">4</td>
+                            <td class=" text-left py-3 px-4">MP04</td>
+                            <td class="text-left py-3 px-4"><a >Rafi Ivan Alessandro</a></td>
+                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" >Alessandro@gmail.com</a></td>
+                            <td class="text-center py-3 px-4"><a  >jl.Kebaktian IV </a></td>
+                            <td class="text-center py-3 px-4"><a >  SPV 2</a></td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span
+                                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    <span aria-hidden
+                                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">Activo</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class=" text-left py-3 px-4">5</td>
+                            <td class=" text-left py-3 px-4">KP05</td>
+                            <td class="text-left py-3 px-4"><a >Muhammad Tri Bintang Sanusi</a></td>
+                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" >Bintang@gmail.com</a></td>
+                            <td class="text-center py-3 px-4"><a  >jl.Brayuda V</a></td>
+                            <td class="text-center py-3 px-4"><a >  Coordinator</a></td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span
+                                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    <span aria-hidden
+                                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">Activo</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class=" text-left py-3 px-4">6</td>
+                            <td class=" text-left py-3 px-4">KP06</td>
+                            <td class="text-left py-3 px-4"><a >Nasihudin </a></td>
+                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" >Nasihudin@gmail.com</a></td>
+                            <td class="text-center py-3 px-4"><a  >jl.Pemanisan </a></td>
+                            <td class="text-center py-3 px-4"><a >Senior Staff</a></td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span
+                                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    <span aria-hidden
+                                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">Activo</span>
+                                </span>
+                            </td>
+                        </tr>
+                     
+                        <tr>
+                            <td class=" text-left py-3 px-4">7</td>
+                            <td class=" text-left py-3 px-4">K007</td>
+                            <td class="text-left py-3 px-4"><a >Rangga </a></td>
+                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" >Rangga@gmail.com</a></td>
+                            <td class="text-center py-3 px-4"><a  >jl.Simanta  </a></td>
+                            <td class="text-center py-3 px-4"><a >Staff</a></td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span
+                                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                    <span aria-hidden
+                                        class="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                    <span class="relative">Activo</span>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+                <!-- Content goes here! 😁 -->
+            </main>
+    
+            <footer class="w-full bg-white text-right p-4">
+                Built by <a target="_blank" href="https://www.instagram.com/mentarialexsaa_/?hl=id" class="underline">mentarialexsaa_ </a>.
+            </footer>
+        </div>
+        
+    </div>
+
+    <!-- AlpineJS -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+</body>
+</html>
